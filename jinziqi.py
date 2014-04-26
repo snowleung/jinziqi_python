@@ -23,6 +23,7 @@ class Jinziqi_core():
             return self.player_b.avatar
         else:
             return str(pos)
+
     def print_chessboard(self, pa, pb):
         chessboard = [(1,2,3), (4,5,6), (7,8,9)]
         chessboard.reverse()

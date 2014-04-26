@@ -12,12 +12,23 @@ class Player():
         '''
         self.chesses.append(c)
 
+class ChessBoard():
+    def __init__(self):
+        self.chesses = []
 
 class Chess(Player):
     def __init__(self):
         self.id = -1
         self.x = 0
         self.y = 0
+
+class ChessBoardTest(unittest.TestCase):
+    def setUp(self):
+        self.chess_board = ChessBoard()
+    def testChessBoard(self):
+        chessboard = ChessBoard()
+        self.assertTrue([] == chessboard.chesses)
+        self.assertTrue(0 == len(chessboard.chesses))
 
 class ChessTest(unittest.TestCase):
     def setUp(self):
