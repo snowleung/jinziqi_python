@@ -12,9 +12,8 @@ class Jinziqi_core():
         self.player_a.avatar = player_a_tag
         self.player_b = Player()
         self.player_b.avatar = player_b_tag
-        self.players.append(Player())
-        self.players.append(Player())
-
+        self.players.append(self.player_a)
+        self.players.append(self.player_b)
         self._chessboard = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
         self.chesses = []
     def print_chess(self, pos, pa, pb):
