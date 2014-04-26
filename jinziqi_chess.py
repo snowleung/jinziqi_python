@@ -48,15 +48,15 @@ class ChessBoardTest(unittest.TestCase):
         for k,v in _chessboard.items():
             _chessinfo.append(Chess(k, v[0], v[1]))
         self.chess_board.load_chesses(_chessinfo)
-        self.assertTrue((0,0) == self.chess_board.chesses(1).chess_XY)
-        self.assertTrue((0,1) == self.chess_board.chesses(2).chess_XY)
-        self.assertTrue((0,2) == self.chess_board.chesses(3).chess_XY)
-        self.assertTrue((1,0) == self.chess_board.chesses(4).chess_XY)
-        self.assertTrue((1,1) == self.chess_board.chesses(5).chess_XY)
-        self.assertTrue((1,2) == self.chess_board.chesses(6).chess_XY)
-        self.assertTrue((2,0) == self.chess_board.chesses(7).chess_XY)
-        self.assertTrue((2,1) == self.chess_board.chesses(8).chess_XY)
-        self.assertTrue((2,2) == self.chess_board.chesses(9).chess_XY)
+        self.assertTrue(1 == self.chess_board.chesses(1).id)
+        self.assertTrue(2 == self.chess_board.chesses(2).id)
+        self.assertTrue(3 == self.chess_board.chesses(3).id)
+        self.assertTrue(4 == self.chess_board.chesses(4).id)
+        self.assertTrue(5 == self.chess_board.chesses(5).id)
+        self.assertTrue(6 == self.chess_board.chesses(6).id)
+        self.assertTrue(7 == self.chess_board.chesses(7).id)
+        self.assertTrue(8 == self.chess_board.chesses(8).id)
+        self.assertTrue(9 == self.chess_board.chesses(9).id)
 
 
 class ChessTest(unittest.TestCase):
