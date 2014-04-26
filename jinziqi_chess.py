@@ -54,6 +54,10 @@ class ChessBoardTest(unittest.TestCase):
         chessboard = ChessBoard()
         self.assertTrue([] == chessboard.chesses())
         self.assertTrue(0 == len(chessboard.chesses()))
+    def testBoardPutChess(self):
+        chess1 = Chess(1, 1, 1)
+        self.assertTrue(self.chess_board.put_chess(chess1))
+        self.assertFalse(self.chess_board.put_chess(chess1))
 #     def testLoadChesses(self):
 #         #jinziqi rule
 #         _chessboard = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
