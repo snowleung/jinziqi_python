@@ -31,6 +31,8 @@ class Chess(Player):
         self.id = id
         self.x = x
         self.y = y
+    def chess_XY(self):
+        return (self.x, self.y)
 
 class ChessBoardTest(unittest.TestCase):
     def setUp(self):
@@ -63,6 +65,9 @@ class ChessTest(unittest.TestCase):
     def testChessLocation(self):
         self.assertTrue(0 == self.chess.x)
         self.assertTrue(0 == self.chess.y)
+    def testChessXY(self):
+        ch = Chess(1, 0, 0)
+        self.assertTrue((0,0), ch.chess_XY())
 
 class PlayerTest(unittest.TestCase):
     def setUp(self):
