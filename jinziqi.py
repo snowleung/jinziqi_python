@@ -3,7 +3,7 @@ import unittest
 import itertools
 from jinziqi_chess import Player
 
-DEBUG = False
+DEBUG = True
 
 class Jinziqi_core():
     def __init__(self, player_a_tag = 'X', player_b_tag = 'O'):
@@ -15,8 +15,6 @@ class Jinziqi_core():
         self.players.append(Player())
         self.players.append(Player())
 
-        self.player_A = self.player_a.chesses
-        self.player_B = self.player_b.chesses
         self._chessboard = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
         self.chesses = []
     def print_chess(self, pos, pa, pb):
@@ -43,7 +41,7 @@ class Jinziqi_core():
         print 'game start, use 1-9 to play'
         flag = 0                # who to play now
         for i in range(1,10):
-            self.print_chessboard(self.player_A, self.player_B)
+            self.print_chessboard(self.player_a.chesses, self.player_b.chesses)
             while True:
                 if i%2 != 0:
                     who = 'player A'
@@ -55,14 +53,14 @@ class Jinziqi_core():
                 n = input(output_str)
                 if self.add_chess(n):
                     if flag == 0:
-                        self.player_A.append(n)
-                        if self.is_win(self.player_A):
+                        self.player_a.chesses.append(n)
+                        if self.is_win(self.player_a.chesses):
                             self.exit_jinziqi(who)
                         else:
                             break
                     else:
-                        self.player_B.append(n)
-                        if self.is_win(self.player_B):
+                        self.player_b.chesses.append(n)
+                        if self.is_win(self.player_b.chesses):
                             self.exit_jinziqi(who)
                         else:
                             break
@@ -158,8 +156,8 @@ class JinziqiTest(unittest.TestCase):
         '''测试玩家
         '''
         jinziqi_program = Jinziqi_core()
-        self.assertEquals([],jinziqi_program.player_A)
-        self.assertEquals([],jinziqi_program.player_B)
+        self.assertEquals([],jinziqi_program.player_a.chesses)
+        self.assertEquals([],jinziqi_program.player_b.chesses)
     def test_coord_range(self):
         '''测试棋子对应的坐标
         '''
