@@ -25,7 +25,7 @@ class ChessBoard():
             if c.id == id:
                 return c
         return None
-
+    
 class Chess(Player):
     def __init__(self, id = -1, x = 0, y = 0):
         self.id = id

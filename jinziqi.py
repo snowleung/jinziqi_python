@@ -1,7 +1,7 @@
 #coding:utf8
 import unittest
 import itertools
-from jinziqi_chess import Player
+from jinziqi_chess import Player, Chess, ChessBoard
 
 DEBUG = True
 
@@ -14,7 +14,13 @@ class Jinziqi_core():
         self.player_b.avatar = player_b_tag
         self.players.append(self.player_a)
         self.players.append(self.player_b)
+        self.cb = ChessBoard()
         self._chessboard = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
+        _chessboard = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
+        _chessinfo = []
+        for k,v in _chessboard.items():
+            _chessinfo.append(Chess(k, v[0], v[1]))
+        self.cb.load_chesses(_chessinfo)
         self.chesses = []
     def print_chess(self, pos, pa, pb):
         if pos in pa:
@@ -158,19 +164,19 @@ class JinziqiTest(unittest.TestCase):
         jinziqi_program = Jinziqi_core()
         self.assertEquals([],jinziqi_program.player_a.chesses)
         self.assertEquals([],jinziqi_program.player_b.chesses)
-    def test_coord_range(self):
-        '''测试棋子对应的坐标
-        '''
-        jinziqi_program = Jinziqi_core()
-        self.assertTrue((0,0) == jinziqi_program.chessboard(1))
-        self.assertTrue((0,1) == jinziqi_program.chessboard(2))
-        self.assertTrue((0,2) == jinziqi_program.chessboard(3))
-        self.assertTrue((1,0) == jinziqi_program.chessboard(4))
-        self.assertTrue((1,1) == jinziqi_program.chessboard(5))
-        self.assertTrue((1,2) == jinziqi_program.chessboard(6))
-        self.assertTrue((2,0) == jinziqi_program.chessboard(7))
-        self.assertTrue((2,1) == jinziqi_program.chessboard(8))
-        self.assertTrue((2,2) == jinziqi_program.chessboard(9))
+#     def test_coord_range(self):
+#         '''测试棋子对应的坐标
+#         '''
+#         jinziqi_program = Jinziqi_core()
+#         self.assertTrue((0,0) == jinziqi_program.chessboard(1))
+#         self.assertTrue((0,1) == jinziqi_program.chessboard(2))
+#         self.assertTrue((0,2) == jinziqi_program.chessboard(3))
+#         self.assertTrue((1,0) == jinziqi_program.chessboard(4))
+#         self.assertTrue((1,1) == jinziqi_program.chessboard(5))
+#         self.assertTrue((1,2) == jinziqi_program.chessboard(6))
+#         self.assertTrue((2,0) == jinziqi_program.chessboard(7))
+#         self.assertTrue((2,1) == jinziqi_program.chessboard(8))
+#         self.assertTrue((2,2) == jinziqi_program.chessboard(9))
     def test_line_x(self):
         '''测试坐标是否符合一条横直线
         '''
