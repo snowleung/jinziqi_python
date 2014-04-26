@@ -14,7 +14,10 @@ class Player():
 
 class ChessBoard():
     def __init__(self):
-        self.chesses = []
+        self._chesses = []
+    def chesses(self):
+        return self._chesses
+
 
 class Chess(Player):
     def __init__(self):
@@ -27,8 +30,8 @@ class ChessBoardTest(unittest.TestCase):
         self.chess_board = ChessBoard()
     def testChessBoard(self):
         chessboard = ChessBoard()
-        self.assertTrue([] == chessboard.chesses)
-        self.assertTrue(0 == len(chessboard.chesses))
+        self.assertTrue([] == chessboard.chesses())
+        self.assertTrue(0 == len(chessboard.chesses()))
 
 class ChessTest(unittest.TestCase):
     def setUp(self):
