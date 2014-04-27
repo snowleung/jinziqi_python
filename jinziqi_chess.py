@@ -27,10 +27,12 @@ class ChessBoard():
         self._chesses = []
         for c in chesses_info:
             self._chesses.append(c)
+        return True
     def put_chess(self, chess):
         pass
-    def chesses(self):
-        return self._chesses
+    def chesses(self, id):
+        
+        return self._chesses[id]
     
 class Chess(Player):
     def __init__(self, id = -1, x = 0, y = 0):
@@ -42,7 +44,7 @@ class Chess(Player):
         return (self.x, self.y)
 
 class Position():
-    def __init__(self, id = -1, x = -, y = -):
+    def __init__(self, id = -1, x = -1, y = -1):
         self.id = id
         self.x = x
         self.y = y
@@ -65,22 +67,13 @@ class ChessBoardTest(unittest.TestCase):
         chess1 = Chess(1, 1, 1)
         self.assertTrue(self.chess_board.put_chess(chess1))
         self.assertFalse(self.chess_board.put_chess(chess1))
-    def testLoadChesses(self):
+    def testLoadPosition(self):
         #jinziqi rule
         _chessboard = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
         _chessinfo = []
         for k,v in _chessboard.items():
-            _chessinfo.append(Chess(k, v[0], v[1]))
-        self.chess_board.load_chesses(_chessinfo)
-        self.assertTrue(1 == self.chess_board.chesses(1).id)
-        self.assertTrue(2 == self.chess_board.chesses(2).id)
-        self.assertTrue(3 == self.chess_board.chesses(3).id)
-        self.assertTrue(4 == self.chess_board.chesses(4).id)
-        self.assertTrue(5 == self.chess_board.chesses(5).id)
-        self.assertTrue(6 == self.chess_board.chesses(6).id)
-        self.assertTrue(7 == self.chess_board.chesses(7).id)
-        self.assertTrue(8 == self.chess_board.chesses(8).id)
-        self.assertTrue(9 == self.chess_board.chesses(9).id)
+            _chessinfo.append(Position(k, v[0], v[1]))
+        self.assertTrue(self.chess_board.load_chesses(_chessinfo))
 
 class ChessTest(unittest.TestCase):
     def setUp(self):
