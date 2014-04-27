@@ -32,6 +32,12 @@ class ChessBoard():
                 p.content = chess
                 return True
         return False
+    def get_chess(self, id):
+        chess = None
+        for p in self._chesses:
+            if p.id == id and p.content is not None:
+                chess = p
+        return chess
 #     def chesses(self, id):
 #         return self._chesses[id]
     
@@ -73,6 +79,13 @@ class ChessBoardTest(unittest.TestCase):
         chess1 = Chess(0, Player())
         self.assertTrue(self.chess_board.put_chess(chess1))
         self.assertFalse(self.chess_board.put_chess(chess1))
+    def testGetChess(self):
+        self.chess_board.put_chess(Chess(1, Player()))
+        ch = self.chess_board.get_chess(1)
+        self.assertTrue(1 == ch.id)
+        ch2 = self.chess_board.get_chess(10)
+        self.assertTrue(None == ch2)
+        
 
 class ChessTest(unittest.TestCase):
     def setUp(self):
