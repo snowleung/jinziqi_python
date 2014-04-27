@@ -8,7 +8,7 @@ class Player():
         self.avatar = ''
         self.chesses = []
     def put_chess(self, location, board):
-        c = Chess(id = location)
+        c = Chess(location, self)
         if board.put_chess(c):
             return c
         else:
@@ -36,9 +36,9 @@ class ChessBoard():
 #         return self._chesses[id]
     
 class Chess():
-    def __init__(self, owner, id = -1)
+    def __init__(self, id, owner):
         self.id = id
-        self.owner = None
+        self.owner = owner
 
 class Position():
     def __init__(self, id = -1, x = -1, y = -1):
@@ -70,19 +70,13 @@ class ChessBoardTest(unittest.TestCase):
         self.assertTrue(1 == chessboard[1].x)
         self.assertTrue(0 == chessboard[1].y)
     def testBoardPutChess(self):
-        chess1 = Chess(1, 1, 1)
+        chess1 = Chess(0, Player())
         self.assertTrue(self.chess_board.put_chess(chess1))
         self.assertFalse(self.chess_board.put_chess(chess1))
 
 class ChessTest(unittest.TestCase):
     def setUp(self):
-        self.chess = Chess()
-    def testChessLocation(self):
-        self.assertTrue(0 == self.chess.x)
-        self.assertTrue(0 == self.chess.y)
-    def testChessXY(self):
-        ch = Chess(1, 0, 0)
-        self.assertTrue((0,0), ch.chess_XY())
+        self.chess = Chess(0, Player())
 
 class PlayerTest(unittest.TestCase):
     def setUp(self):
