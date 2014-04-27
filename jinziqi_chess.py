@@ -23,25 +23,21 @@ class Player():
 class ChessBoard():
     def __init__(self, x, y):
         self._chesses = []
+        self.load_chess_board(x, y)
     def load_chess_board(self, x, y):
+        self._chesses = []
         id = 0
         for yy in range(y):
             for xx in range(x):
                 self._chesses.append(Position(id, xx, yy))
                 id = id + 1
         return self._chesses
-    def load_chesses(self, chesses_info):
-        self._chesses = []
-        for c in chesses_info:
-            self._chesses.append(c)
-        return self._chesses
     def put_chess(self, chess):
         for p in self._chesses:
             if p.id == chess.id and p.content is None:
                 p.content = chess
                 return True
-            else:
-                return False
+        return False
 #     def chesses(self, id):
 #         return self._chesses[id]
     
@@ -69,13 +65,7 @@ class PositionTest(unittest.TestCase):
 
 class ChessBoardTest(unittest.TestCase):
     def setUp(self):
-        self.chess_board = ChessBoard(1, 1)
-        _chessboard = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
-        _chessinfo = []
-        for k,v in _chessboard.items():
-            _chessinfo.append(Position(k, v[0], v[1]))
-        self.chess_board.load_chesses(_chessinfo)
-
+        self.chess_board = ChessBoard(3, 3)
     def testChessBoard(self):
         cb = ChessBoard(3, 3)
         chessboard = cb.load_chess_board(3, 3)
@@ -89,22 +79,10 @@ class ChessBoardTest(unittest.TestCase):
         self.assertTrue(1 == chessboard[1].id)
         self.assertTrue(1 == chessboard[1].x)
         self.assertTrue(0 == chessboard[1].y)
-
-#     def testChessBoard(self):
-#         chessboard = ChessBoard()
-#         self.assertTrue([] == chessboard.chesses())
-#         self.assertTrue(0 == len(chessboard.chesses()))
     def testBoardPutChess(self):
         chess1 = Chess(1, 1, 1)
         self.assertTrue(self.chess_board.put_chess(chess1))
         self.assertFalse(self.chess_board.put_chess(chess1))
-    def testLoadPosition(self):
-        #jinziqi rule
-        _chessboard = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
-        _chessinfo = []
-        for k,v in _chessboard.items():
-            _chessinfo.append(Position(k, v[0], v[1]))
-        self.assertTrue(len(_chessinfo) == len(self.chess_board.load_chesses(_chessinfo)))
 
 class ChessTest(unittest.TestCase):
     def setUp(self):
