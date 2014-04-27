@@ -27,12 +27,16 @@ class ChessBoard():
         self._chesses = []
         for c in chesses_info:
             self._chesses.append(c)
-        return True
+        return self._chesses
     def put_chess(self, chess):
-        pass
-    def chesses(self, id):
-        
-        return self._chesses[id]
+        for p in self._chesses:
+            if p.id == chess.id and p.content is None:
+                p.content = chess
+                return True
+            else:
+                return False
+#     def chesses(self, id):
+#         return self._chesses[id]
     
 class Chess(Player):
     def __init__(self, id = -1, x = 0, y = 0):
@@ -59,10 +63,15 @@ class PositionTest(unittest.TestCase):
 class ChessBoardTest(unittest.TestCase):
     def setUp(self):
         self.chess_board = ChessBoard()
-    def testChessBoard(self):
-        chessboard = ChessBoard()
-        self.assertTrue([] == chessboard.chesses())
-        self.assertTrue(0 == len(chessboard.chesses()))
+        _chessboard = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
+        _chessinfo = []
+        for k,v in _chessboard.items():
+            _chessinfo.append(Position(k, v[0], v[1]))
+        self.chess_board.load_chesses(_chessinfo)
+#     def testChessBoard(self):
+#         chessboard = ChessBoard()
+#         self.assertTrue([] == chessboard.chesses())
+#         self.assertTrue(0 == len(chessboard.chesses()))
     def testBoardPutChess(self):
         chess1 = Chess(1, 1, 1)
         self.assertTrue(self.chess_board.put_chess(chess1))
@@ -73,12 +82,11 @@ class ChessBoardTest(unittest.TestCase):
         _chessinfo = []
         for k,v in _chessboard.items():
             _chessinfo.append(Position(k, v[0], v[1]))
-        self.assertTrue(self.chess_board.load_chesses(_chessinfo))
+        self.assertTrue(len(_chessinfo) == len(self.chess_board.load_chesses(_chessinfo)))
 
 class ChessTest(unittest.TestCase):
     def setUp(self):
         self.chess = Chess()
-
     def testChessLocation(self):
         self.assertTrue(0 == self.chess.x)
         self.assertTrue(0 == self.chess.y)
@@ -99,12 +107,12 @@ class PlayerTest(unittest.TestCase):
     def testPlayerAvatar(self):
         self.player.avatar = 'X'
         self.assertTrue('X' == self.player.avatar)
-    def test_chess_exists(self):
-        '''can't add chess twice at the some loaction
-        '''
-        chess = Chess(1, 0, 0)
-        self.assertTrue(self.player.add_chess(chess, self.chess_board))
-        self.assertFalse(self.player.add_chess(chess, self.chess_board))
+#     def test_chess_exists(self):
+#         '''can't add chess twice at the some loaction
+#         '''
+#         chess = Chess(1, 0, 0)
+#         self.assertTrue(self.player.add_chess(chess, self.chess_board))
+#         self.assertFalse(self.player.add_chess(chess, self.chess_board))
 
 if __name__ == '__main__':
     if DEBUG:
