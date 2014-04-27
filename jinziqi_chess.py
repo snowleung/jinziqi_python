@@ -13,18 +13,6 @@ class Player():
             return c
         else:
             return None
-    def add_chess(self, c, board):
-        '''
-        c = chess
-        board = chessboard
-        '''
-        chess = board.chesses(c.id)
-        if chess == None:
-            self.chesses.append(c)
-            board.put_chess(c)
-            return True
-        else:
-            return False
 
 class ChessBoard():
     def __init__(self, x, y):
@@ -47,14 +35,10 @@ class ChessBoard():
 #     def chesses(self, id):
 #         return self._chesses[id]
     
-class Chess(Player):
-    def __init__(self, id = -1, x = 0, y = 0):
+class Chess():
+    def __init__(self, owner, id = -1)
         self.id = id
-        self.x = x
-        self.y = y
-        self.is_use = False
-    def chess_XY(self):
-        return (self.x, self.y)
+        self.owner = None
 
 class Position():
     def __init__(self, id = -1, x = -1, y = -1):
