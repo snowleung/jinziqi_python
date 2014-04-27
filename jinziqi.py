@@ -82,18 +82,6 @@ class Jinziqi_core():
         return self.cb
     def player_chesses_combinations(self, player, c = 3 ):
         return tuple(itertools.combinations(player, c))
-    def chesses_total(self):
-        a = set(range(1,10))
-        b = set(self.chesses)
-        return list(a - b)
-    def add_chess(self, ch):
-        if ch < 1 or ch > 9 :
-            return False
-        if ch not in (self.chesses):
-            self.chesses.append(ch)
-            return True
-        else:
-            return False
     def chessboard(self, t):
         _ch = self.cb.get_chess(t)
         convert_obj = None
@@ -227,27 +215,6 @@ class JinziqiTest(unittest.TestCase):
         b = jinziqi_program.chessboard(4)
         c = jinziqi_program.chessboard(2)
         self.assertTrue(jinziqi_program.isline(a, b, c))
-    def test_chess_exists(self):
-        '''
-        '''
-        jinziqi_program = Jinziqi_core()
-        self.assertTrue(jinziqi_program.add_chess(1))
-        self.assertTrue(jinziqi_program.add_chess(2))
-        self.assertFalse(jinziqi_program.add_chess(1))
-    def test_chess_range(self):
-        '''测试棋盘中可用的位置
-        '''
-        jinziqi_program = Jinziqi_core()
-        self.assertFalse(jinziqi_program.add_chess(10))
-        self.assertFalse(jinziqi_program.add_chess(0))
-        self.assertFalse(jinziqi_program.add_chess(-1))
-    def test_chess_total(self):
-        '''测试棋盘中剩余的空格
-        '''
-        jinziqi_program = Jinziqi_core()
-        jinziqi_program.add_chess(9)
-        jinziqi_program.add_chess(8)
-        self.assertTrue([1,2,3,4,5,6,7] == jinziqi_program.chesses_total())
     def test_chesses_combinations(self):
         '''测试棋子的组合
         '''
@@ -262,13 +229,6 @@ class JinziqiTest(unittest.TestCase):
         self.assertTrue(jinziqi_program.is_win([1,2,3,7,8]))
         self.assertTrue(jinziqi_program.is_win([7,8,9,5]))
         self.assertFalse(jinziqi_program.is_win([1,2,7,8]))
-    def test_chess_tag(self):
-        jinziqi_program = Jinziqi_core() # test default value
-        self.assertTrue('X' == jinziqi_program.player_a.avatar)
-        self.assertTrue('O' == jinziqi_program.player_b.avatar)
-        jinziqi_program = Jinziqi_core('O', 'X')
-        self.assertTrue('O' == jinziqi_program.player_a.avatar)
-        self.assertTrue('X' == jinziqi_program.player_b.avatar)
     def test_print_chessboard(self):
         jinziqi_program = Jinziqi_core('X', 'O')
         position = 7
