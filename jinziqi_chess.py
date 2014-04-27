@@ -81,12 +81,6 @@ class ChessTest(unittest.TestCase):
 class PlayerTest(unittest.TestCase):
     def setUp(self):
         self.player = Player()
-#         self.chess_board = ChessBoard()
-#         _chessboard = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
-#         _chessinfo = []
-#         for k,v in _chessboard.items():
-#             _chessinfo.append(Chess(k, v[0], v[1]))
-#         self.chess_board.load_chesses(_chessinfo)
     def testPlayerPutChess(self):
         cb = ChessBoard(3,3)
         chess = self.player.put_chess(0, cb)
@@ -97,12 +91,6 @@ class PlayerTest(unittest.TestCase):
     def testPlayerAvatar(self):
         self.player.avatar = 'X'
         self.assertTrue('X' == self.player.avatar)
-#     def test_chess_exists(self):
-#         '''can't add chess twice at the some loaction
-#         '''
-#         chess = Chess(1, 0, 0)
-#         self.assertTrue(self.player.add_chess(chess, self.chess_board))
-#         self.assertFalse(self.player.add_chess(chess, self.chess_board))
 
 if __name__ == '__main__':
     if DEBUG:
