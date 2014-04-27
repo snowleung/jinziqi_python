@@ -7,6 +7,12 @@ class Player():
     def __init__(self):
         self.avatar = ''
         self.chesses = []
+    def put_chess(self, location, board):
+        c = Chess(id = location)
+        if board.put_chess(c):
+            return c
+        else:
+            return None
     def add_chess(self, c, board):
         '''
         c = chess
@@ -103,7 +109,13 @@ class PlayerTest(unittest.TestCase):
 #         for k,v in _chessboard.items():
 #             _chessinfo.append(Chess(k, v[0], v[1]))
 #         self.chess_board.load_chesses(_chessinfo)
-
+    def testPlayerPutChess(self):
+        cb = ChessBoard(3,3)
+        chess = self.player.put_chess(0, cb)
+        self.assertTrue(isinstance(chess, Chess))
+        self.assertTrue(0 == chess.id)
+        chess = self.player.put_chess(0, cb)
+        self.assertTrue(None == chess)
     def testPlayerAvatar(self):
         self.player.avatar = 'X'
         self.assertTrue('X' == self.player.avatar)
