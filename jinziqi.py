@@ -78,7 +78,8 @@ class Jinziqi_core():
             if self.isline(a, b, c):
                 return True
         return False
-
+    def get_chessboard(self):
+        return self.cb
     def player_chesses_combinations(self, player, c = 3 ):
         return tuple(itertools.combinations(player, c))
     def chesses_total(self):
@@ -94,7 +95,11 @@ class Jinziqi_core():
         else:
             return False
     def chessboard(self, t):
-        return self._chessboard[t]
+        _ch = self.cb.get_chess(t)
+        convert_obj = None
+        if _ch:
+            convert_obj = (_ch.x, _ch.y)
+        return convert_obj
     def isline(self, a, b, c):
         if self._isline_x(a,b,c):
             return True
@@ -175,18 +180,30 @@ class JinziqiTest(unittest.TestCase):
         '''测试坐标是否符合一条横直线
         '''
         jinziqi_program = Jinziqi_core()
+        chessboard = jinziqi_program.get_chessboard()
+        chessboard.put_chess(Chess(1, Player()))
         a = jinziqi_program.chessboard(1)
+        chessboard.put_chess(Chess(2, Player()))
         b = jinziqi_program.chessboard(2)
+        chessboard.put_chess(Chess(3, Player()))
         c = jinziqi_program.chessboard(3)
         self.assertTrue(jinziqi_program.isline(a, b, c))
+        chessboard.put_chess(Chess(1, Player()))
         a = jinziqi_program.chessboard(1)
+        chessboard.put_chess(Chess(8, Player()))
         b = jinziqi_program.chessboard(8)
+        chessboard.put_chess(Chess(3, Player()))
         c = jinziqi_program.chessboard(3)
         self.assertFalse(jinziqi_program.isline(a, b, c))
     def test_line_y(self):
         '''测试坐标是否符合一条纵直线
         '''
         jinziqi_program = Jinziqi_core()
+        chessboard = jinziqi_program.get_chessboard()
+        chessboard = jinziqi_program.get_chessboard()
+        chessboard.put_chess(Chess(1, Player()))
+        chessboard.put_chess(Chess(4, Player()))
+        chessboard.put_chess(Chess(7, Player()))
         a = jinziqi_program.chessboard(1)
         b = jinziqi_program.chessboard(4)
         c = jinziqi_program.chessboard(7)
@@ -195,10 +212,17 @@ class JinziqiTest(unittest.TestCase):
         '''测试方程y=x和y=2-x两条直线
         '''
         jinziqi_program = Jinziqi_core()
+        chessboard = jinziqi_program.get_chessboard()
+        chessboard.put_chess(Chess(1, Player()))
+        chessboard.put_chess(Chess(5, Player()))
+        chessboard.put_chess(Chess(9, Player()))
         a = jinziqi_program.chessboard(1)
         b = jinziqi_program.chessboard(5)
         c = jinziqi_program.chessboard(9)
         self.assertTrue(jinziqi_program.isline(a, b, c))
+        chessboard.put_chess(Chess(7, Player()))
+        chessboard.put_chess(Chess(5, Player()))
+        chessboard.put_chess(Chess(3, Player()))
         a = jinziqi_program.chessboard(7)
         b = jinziqi_program.chessboard(5)
         c = jinziqi_program.chessboard(3)
