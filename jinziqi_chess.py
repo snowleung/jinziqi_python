@@ -77,6 +77,11 @@ class ChessBoardTest(unittest.TestCase):
 class ChessTest(unittest.TestCase):
     def setUp(self):
         self.chess = Chess(0, Player())
+    def testChessInfo(self):
+        p = Player()
+        c = Chess(0, p)
+        self.assertTrue(p == c.owner)
+        self.assertTrue(0 == c.id)
 
 class PlayerTest(unittest.TestCase):
     def setUp(self):
