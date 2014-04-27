@@ -41,6 +41,19 @@ class Chess(Player):
     def chess_XY(self):
         return (self.x, self.y)
 
+class Position():
+    def __init__(self, id = -1, x = -, y = -):
+        self.id = id
+        self.x = x
+        self.y = y
+        self.content = None
+    def XY(self):
+        return (self.x, self.y)
+
+class PositionTest(unittest.TestCase):
+    def setUp(self):
+        self.pos = Position()
+
 class ChessBoardTest(unittest.TestCase):
     def setUp(self):
         self.chess_board = ChessBoard()
