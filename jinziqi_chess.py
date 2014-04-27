@@ -21,8 +21,15 @@ class Player():
             return False
 
 class ChessBoard():
-    def __init__(self):
+    def __init__(self, x, y):
         self._chesses = []
+    def load_chess_board(self, x, y):
+        id = 0
+        for yy in range(y):
+            for xx in range(x):
+                self._chesses.append(Position(id, xx, yy))
+                id = id + 1
+        return self._chesses
     def load_chesses(self, chesses_info):
         self._chesses = []
         for c in chesses_info:
@@ -62,12 +69,27 @@ class PositionTest(unittest.TestCase):
 
 class ChessBoardTest(unittest.TestCase):
     def setUp(self):
-        self.chess_board = ChessBoard()
+        self.chess_board = ChessBoard(1, 1)
         _chessboard = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
         _chessinfo = []
         for k,v in _chessboard.items():
             _chessinfo.append(Position(k, v[0], v[1]))
         self.chess_board.load_chesses(_chessinfo)
+
+    def testChessBoard(self):
+        cb = ChessBoard(3, 3)
+        chessboard = cb.load_chess_board(3, 3)
+        self.assertTrue(isinstance(chessboard, list))
+        self.assertTrue(isinstance(chessboard[0], Position))
+        # Position(0, 0, 0) 
+        self.assertTrue(0 == chessboard[0].id)
+        self.assertTrue(0 == chessboard[0].x)
+        self.assertTrue(0 == chessboard[0].y)
+        # Position(1, 1, 0)
+        self.assertTrue(1 == chessboard[1].id)
+        self.assertTrue(1 == chessboard[1].x)
+        self.assertTrue(0 == chessboard[1].y)
+
 #     def testChessBoard(self):
 #         chessboard = ChessBoard()
 #         self.assertTrue([] == chessboard.chesses())
@@ -97,7 +119,7 @@ class ChessTest(unittest.TestCase):
 class PlayerTest(unittest.TestCase):
     def setUp(self):
         self.player = Player()
-        self.chess_board = ChessBoard()
+#         self.chess_board = ChessBoard()
 #         _chessboard = {1:(0,0), 2:(0,1), 3:(0,2), 4:(1,0), 5:(1,1), 6:(1,2), 7:(2,0), 8:(2,1), 9:(2,2)}
 #         _chessinfo = []
 #         for k,v in _chessboard.items():
