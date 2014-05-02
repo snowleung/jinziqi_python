@@ -226,9 +226,13 @@ class JinziqiTest(unittest.TestCase):
         '''测试检测获胜的判断
         '''
         jinziqi_program = Jinziqi_core()
-        self.assertTrue(jinziqi_program.is_win([1,2,3,7,8]))
-        self.assertTrue(jinziqi_program.is_win([7,8,9,5]))
-        self.assertFalse(jinziqi_program.is_win([1,2,7,8]))
+        chessboard = jinziqi_program.get_chessboard()
+        chessboard.put_chess(Chess(0, Player()))
+        chessboard.put_chess(Chess(1, Player()))
+        chessboard.put_chess(Chess(2, Player()))
+        chessboard.put_chess(Chess(6, Player()))
+        chessboard.put_chess(Chess(7, Player()))
+        self.assertTrue(jinziqi_program.is_win([0,1,2,6,7]))
     def test_print_chessboard(self):
         jinziqi_program = Jinziqi_core('X', 'O')
         position = 7
