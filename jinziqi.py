@@ -6,7 +6,7 @@ from jinziqi_chess import Player, Chess, ChessBoard
 DEBUG = False
 
 class Jinziqi_core():
-    def __init__(self, player_a_tag = 'X', player_b_tag = 'O'):
+    def __init__(self, player_a_tag = 'A', player_b_tag = 'B'):
         self.players = []
         self.player_a = Player()
         self.player_a.avatar = player_a_tag
@@ -14,26 +14,26 @@ class Jinziqi_core():
         self.player_b.avatar = player_b_tag
         self.players.append(self.player_a)
         self.players.append(self.player_b)
-        self.cb = ChessBoard(3,3)
-    def print_chess(self, pos, pa, pb):
-        if pos in pa:
-            return self.player_a.avatar
-        elif pos in pb:
-            return self.player_b.avatar
-        else:
-            return str(pos)
+        self.x = 3
+        self.cb = ChessBoard(self.x, self.x)
 
-    def print_chessboard(self, pa, pb):
-        chessboard = [(1,2,3), (4,5,6), (7,8,9)]
-        chessboard.reverse()
-        for l in chessboard:
-            for i in l:
-                print self.print_chess(i, pa, pb),
-            print ''
-
+    def print_chessboard(self):                         
+        cbc = self.cb._chesses
+        step = 1
+        for c in cbc:
+            if c.content == None:
+                print c.id,
+            else:
+                print c.content.owner.avatar,
+            if step == self.x:
+                step = 1
+                print ''
+                continue
+            step = step + 1
     def add_chess(self, player, location):
         return player.put_chess(location, self.cb)
     def exit_jinziqi(self, info):
+        self.print_chessboard()
         who = info
         print "%s is win" % who
         print 'congratulation %s please run the program again' % who
@@ -43,6 +43,7 @@ class Jinziqi_core():
         input: player,location
         '''
         while(1):
+            self.print_chessboard()
             str_in = input('enter player, location')
             player, location = str_in.split(',')
             location = int(location)
