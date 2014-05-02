@@ -32,6 +32,8 @@ class Jinziqi_core():
                 print self.print_chess(i, pa, pb),
             print ''
 
+    def add_chess(self, player, location):
+        return Chess(player, location)
     def exit_jinziqi(self, info):
         who = info
         print "%s is win" % who
@@ -40,7 +42,7 @@ class Jinziqi_core():
     def jinziqi_start(self):
         print 'game start, use 1-9 to play'
         flag = 0                # who to play now
-        for i in range(1,10):
+        for i in range(0,9):
             self.print_chessboard(self.player_a.chesses, self.player_b.chesses)
             while True:
                 if i%2 != 0:
@@ -49,7 +51,8 @@ class Jinziqi_core():
                 else:
                     who = 'player B'
                     flag = 1
-                output_str = 'Now %s, select(%s): ' % (who, self.chesses_total())
+#                 output_str = 'Now %s, select(%s): ' % (who, self.chesses_total())
+                output_str = 'Now %s, select(%s): ' % (who, 'null')
                 n = input(output_str)
                 if self.add_chess(n):
                     if flag == 0:
@@ -233,6 +236,12 @@ class JinziqiTest(unittest.TestCase):
         chessboard.put_chess(Chess(6, Player()))
         chessboard.put_chess(Chess(7, Player()))
         self.assertTrue(jinziqi_program.is_win([0,1,2,6,7]))
+    def test_add_chess(self):
+        jinziqi_program = Jinziqi_core('X', 'O')
+        p1 = Player()
+        chess = jinziqi_program.add_chess(p1, 1)
+        self.assertTrue(chess.owner == p1)
+        self.assertTrue(chess.id == 1)
     def test_print_chessboard(self):
         jinziqi_program = Jinziqi_core('X', 'O')
         position = 7
