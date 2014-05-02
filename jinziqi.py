@@ -15,7 +15,6 @@ class Jinziqi_core():
         self.players.append(self.player_a)
         self.players.append(self.player_b)
         self.cb = ChessBoard(3,3)
-        self.chesses = []
     def print_chess(self, pos, pa, pb):
         if pos in pa:
             return self.player_a.avatar
@@ -57,38 +56,6 @@ class Jinziqi_core():
                     self.exit_jinziqi('p2')
             if self.cb.is_full():
                 print 'no one win'
-    def jinziqi_start(self):
-        print 'game start, use 1-9 to play'
-        flag = 0                # who to play now
-        for i in range(0,9):
-            self.print_chessboard(self.player_a.my_chesses(), self.player_b.my_chesses())
-            while True:
-                if i%2 != 0:
-                    who = 'player A'
-                    flag = 0
-                else:
-                    who = 'player B'
-                    flag = 1
-#                 output_str = 'Now %s, select(%s): ' % (who, self.chesses_total())
-                output_str = 'Now %s, select(%s): ' % (who, 'null')
-                n = input(output_str)
-                if self.add_chess(n):
-                    if flag == 0:
-                        self.player_a.chesses.append(n)
-                        if self.is_win(self.player_a.my_chesses()):
-                            self.exit_jinziqi(who)
-                        else:
-                            break
-                    else:
-                        self.player_b.chesses.append(n)
-                        if self.is_win(self.player_b.my_chesses()):
-                            self.exit_jinziqi(who)
-                        else:
-                            break
-                else:
-                    print 'choose the bad chess,do it again'
-        print '平手了,重启程序再玩一次'
-
     def is_win(self, p):
         combinations = self.player_chesses_combinations(p)
         #cb = [self.chessboard(c) for c in combinations] # 有坐标的棋子集合
