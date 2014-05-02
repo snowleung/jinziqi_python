@@ -95,6 +95,11 @@ class ChessTest(unittest.TestCase):
         c = Chess(0, p)
         self.assertTrue(p == c.owner)
         self.assertTrue(0 == c.id)
+    def testChessOwner(self):
+        p = Player()
+        c = Chess(0, p)
+        self.assertTrue(c.owner == p)
+        self.assertFalse(c.owner == Player())
 
 class PlayerTest(unittest.TestCase):
     def setUp(self):

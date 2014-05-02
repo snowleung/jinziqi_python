@@ -33,7 +33,7 @@ class Jinziqi_core():
             print ''
 
     def add_chess(self, player, location):
-        return Chess(player, location)
+        return Chess(location, player)
     def exit_jinziqi(self, info):
         who = info
         print "%s is win" % who
