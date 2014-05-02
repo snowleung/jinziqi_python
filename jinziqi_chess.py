@@ -27,6 +27,11 @@ class ChessBoard():
                 self._chesses.append(Position(id, xx, yy))
                 id = id + 1
         return self._chesses
+    def is_full(self):
+        for c in self._chesses:
+            if c.content == None:
+                return False
+        return True
     def put_chess(self, chess):
         for p in self._chesses:
             if p.id == chess.id and p.content is None:
@@ -99,6 +104,12 @@ class ChessBoardTest(unittest.TestCase):
         self.assertTrue(isinstance(chesses, list))
         self.assertTrue(chesses[0].owner == p)
         self.assertFalse(chesses[0].owner == Player())
+    def testChessboardisFullOfChesses(self):
+        c_board = ChessBoard(3, 3)
+        self.assertFalse(c_board.is_full())
+        for i in range(0, 9):
+            c_board.put_chess(Chess(i, Player()))
+        self.assertTrue(c_board.is_full())
 
 class ChessTest(unittest.TestCase):
     def setUp(self):
