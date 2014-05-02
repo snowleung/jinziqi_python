@@ -55,6 +55,8 @@ class Jinziqi_core():
                 self.add_chess(self.player_b, location)
                 if self.is_win([c.id for c in self.player_b.my_chesses(self.cb)]):
                     self.exit_jinziqi('p2')
+            if self.cb.is_full():
+                print 'no one win'
     def jinziqi_start(self):
         print 'game start, use 1-9 to play'
         flag = 0                # who to play now
