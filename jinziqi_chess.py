@@ -6,13 +6,14 @@ DEBUG = True
 class Player():
     def __init__(self):
         self.avatar = ''
-        self.chesses = []
     def put_chess(self, location, board):
         c = Chess(location, self)
         if board.put_chess(c):
             return c
         else:
             return None
+    def my_chesses(self, board):
+        return board.get_player_chesses(self)
 
 class ChessBoard():
     def __init__(self, x, y):
@@ -38,6 +39,12 @@ class ChessBoard():
             if p.id == id and p.content is not None:
                 chess = p
         return chess
+    def get_player_chesses(self, player):
+        chesses = []
+        for p in self._chesses:
+            if p.content and p.content.owner == player:
+                chesses.append(p.content)
+        return chesses
 #     def chesses(self, id):
 #         return self._chesses[id]
     
@@ -85,7 +92,13 @@ class ChessBoardTest(unittest.TestCase):
         self.assertTrue(1 == ch.id)
         ch2 = self.chess_board.get_chess(10)
         self.assertTrue(None == ch2)
-        
+    def testGetPlayerChesses(self):
+        p = Player()
+        self.chess_board.put_chess(Chess(1, p))
+        chesses = self.chess_board.get_player_chesses(p)
+        self.assertTrue(isinstance(chesses, list))
+        self.assertTrue(chesses[0].owner == p)
+        self.assertFalse(chesses[0].owner == Player())
 
 class ChessTest(unittest.TestCase):
     def setUp(self):
@@ -114,6 +127,11 @@ class PlayerTest(unittest.TestCase):
     def testPlayerAvatar(self):
         self.player.avatar = 'X'
         self.assertTrue('X' == self.player.avatar)
+    def testPlayerChesses(self):
+        cb = ChessBoard(3,3)
+        self.player.put_chess(1, cb)
+        chesses = self.player.my_chesses(cb)
+        self.assertTrue(chesses[0].owner == self.player)
 
 if __name__ == '__main__':
     if DEBUG:
