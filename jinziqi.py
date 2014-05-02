@@ -3,7 +3,7 @@ import unittest
 import itertools
 from jinziqi_chess import Player, Chess, ChessBoard
 
-DEBUG = True
+DEBUG = False
 
 class Jinziqi_core():
     def __init__(self, player_a_tag = 'X', player_b_tag = 'O'):
@@ -39,11 +39,27 @@ class Jinziqi_core():
         print "%s is win" % who
         print 'congratulation %s please run the program again' % who
         exit(0)
+    def jinziqi_start2(self):
+        '''
+        input: player,location
+        '''
+        while(1):
+            str_in = input('enter player, location')
+            player, location = str_in.split(',')
+            location = int(location)
+            if player == 'a':
+                self.add_chess(self.player_a, location)
+                if self.is_win([c.id for c in self.player_a.my_chesses(self.cb)]):
+                    self.exit_jinziqi('p1')
+            if player == 'b':
+                self.add_chess(self.player_b, location)
+                if self.is_win([c.id for c in self.player_b.my_chesses(self.cb)]):
+                    self.exit_jinziqi('p2')
     def jinziqi_start(self):
         print 'game start, use 1-9 to play'
         flag = 0                # who to play now
         for i in range(0,9):
-            self.print_chessboard(self.player_a.chesses, self.player_b.chesses)
+            self.print_chessboard(self.player_a.my_chesses(), self.player_b.my_chesses())
             while True:
                 if i%2 != 0:
                     who = 'player A'
@@ -57,13 +73,13 @@ class Jinziqi_core():
                 if self.add_chess(n):
                     if flag == 0:
                         self.player_a.chesses.append(n)
-                        if self.is_win(self.player_a.chesses):
+                        if self.is_win(self.player_a.my_chesses()):
                             self.exit_jinziqi(who)
                         else:
                             break
                     else:
                         self.player_b.chesses.append(n)
-                        if self.is_win(self.player_b.chesses):
+                        if self.is_win(self.player_b.my_chesses()):
                             self.exit_jinziqi(who)
                         else:
                             break
@@ -152,21 +168,9 @@ class JinziqiTest(unittest.TestCase):
         '''测试玩家
         '''
         jinziqi_program = Jinziqi_core()
-        self.assertEquals([],jinziqi_program.player_a.chesses)
-        self.assertEquals([],jinziqi_program.player_b.chesses)
-#     def test_coord_range(self):
-#         '''测试棋子对应的坐标
-#         '''
-#         jinziqi_program = Jinziqi_core()
-#         self.assertTrue((0,0) == jinziqi_program.chessboard(1))
-#         self.assertTrue((0,1) == jinziqi_program.chessboard(2))
-#         self.assertTrue((0,2) == jinziqi_program.chessboard(3))
-#         self.assertTrue((1,0) == jinziqi_program.chessboard(4))
-#         self.assertTrue((1,1) == jinziqi_program.chessboard(5))
-#         self.assertTrue((1,2) == jinziqi_program.chessboard(6))
-#         self.assertTrue((2,0) == jinziqi_program.chessboard(7))
-#         self.assertTrue((2,1) == jinziqi_program.chessboard(8))
-#         self.assertTrue((2,2) == jinziqi_program.chessboard(9))
+        self.assertEquals([],jinziqi_program.player_a.my_chesses(jinziqi_program.cb))
+        self.assertEquals([],jinziqi_program.player_b.my_chesses(jinziqi_program.cb))
+
     def test_line_x(self):
         '''测试坐标是否符合一条横直线
         '''
@@ -263,5 +267,5 @@ if __name__ == '__main__':
         unittest.main()
     else:
         jinziqi_program = Jinziqi_core()
-        jinziqi_program.jinziqi_start()
+        jinziqi_program.jinziqi_start2()
 
