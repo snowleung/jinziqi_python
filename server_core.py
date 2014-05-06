@@ -15,7 +15,6 @@ class Core_TCP():
         self.s.send('something')
         data = self.s.recv(1024)
         print 'i recv %s' % data
-        
     def start_server(self):
         host = 'localhost'
         port = 11234
@@ -28,6 +27,19 @@ class Core_TCP():
             print "data is %s " % data
             client.send("echo")
             client.close()
+    def regist_server(self, stream):
+        prefx, types, info = stream.split(',') # 解析过程
+        game_data = Game_data(prefx, types, info)
+        self.clients.append(game_data)
+        return game_data
+    def match_game(self):
+        matches = []
+        for g in self.clients:
+            if len(matches) < 2 and g.client == None:
+                matches.append(g)
+        c1, c2 = matches
+        c1.client = c2
+        c2.client = c1
 
 class Core_TCPTest(unittest.TestCase):
     def setUp(self):
@@ -36,12 +48,25 @@ class Core_TCPTest(unittest.TestCase):
         self.assertTrue(len(self.ser.clients) == 0)
         self.ser.clients.append(Game_data())
         self.assertTrue(len(self.ser.clients) == 1)
+    def testRegistServer(self):
+        game_data = self.ser.regist_server('game,1,0')
+        self.assertTrue(isinstance(game_data, Game_data))
+    def testMatchGame(self):
+        c1 = Game_data()
+        c2 = Game_data()
+        self.ser.clients.append(c1)
+        self.ser.clients.append(c2)
+        self.ser.match_game()
+        self.assertTrue(c1.client == c2)
+        self.assertTrue(c2.client == c1)
 
 class Game_data():
-    def __init__(self):
-        self.prefx = 'game'
-        self.types = 1
-        self.info = '0'
+    def __init__(self, prefx = 'game', types = 1, info = '0'):
+        self.prefx = prefx
+        self.types = types
+        self.info = info
+        self.status = 0         # 0 is waitting, 1 is busy
+        self.client = None      # 另一个客户端
 class Game_dataTest(unittest.TestCase):
     def setUp(self):
         self.gd = Game_data()
