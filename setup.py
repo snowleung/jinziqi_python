@@ -10,7 +10,7 @@ setup(name='jinziqi',
       author_email='callsamleung@gmail.com',
       url='https://github.com/callsamleung/jinziqi_python',
       license='mit',
-      packages=find_packages(exclude=['jinziqi']),
+      packages=find_packages(),
       zip_safe=False,
       setup_requires=[
           'versiontools>=1.8',

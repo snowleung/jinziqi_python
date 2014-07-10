@@ -13,6 +13,10 @@ run the following script:
 1. add setup.py
 2. update README.md
 
+####BUGFIX
+
+1. remove setup.py exclude variable
+
 ##feature
 
 1. NETWORK CONNECTION
