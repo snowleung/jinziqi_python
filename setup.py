@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(name='jinziqi',
-      version=':versiontools:jinziqi:',
+      version='0.1.0',
       description="jinziqi for python",
       long_description="""""",
       classifiers=['Programming Language :: Python :: 2.7',
