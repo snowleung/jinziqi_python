@@ -5,7 +5,10 @@ setup(name='jinziqi',
       version=':versiontools:jinziqi:',
       description="jinziqi for python",
       long_description="""""",
-      classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
+      classifiers=['Programming Language :: Python :: 2.7',
+                   'Programming Language :: Python :: Implementation :: PyPy',
+                   'Environment :: Console',
+                   'License :: OSI Approved :: MIT License'], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
       author='samleung',
       author_email='callsamleung@gmail.com',
       url='https://github.com/callsamleung/jinziqi_python',
@@ -13,7 +16,6 @@ setup(name='jinziqi',
       packages=find_packages(exclude=('tests',)),
       zip_safe=False,
       test_suite='tests',
-      
       setup_requires=[
           'versiontools>=1.8',
           ],
