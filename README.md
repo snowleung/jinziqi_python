@@ -1,4 +1,12 @@
 [![Build Status](https://travis-ci.org/snowleung/jinziqi_python.svg?branch=master)](https://travis-ci.org/snowleung/jinziqi_python)
+
+[![Downloads](https://pypip.in/download/jinziqi/badge.svg)](https://pypi.python.org/pypi/jinziqi/)
+
+[![Latest Version](https://pypip.in/version/jinziqi/badge.svg)](https://pypi.python.org/pypi/jinziqi/)
+
+[![Supported Python versions](https://pypip.in/py_versions/jinziqi/badge.svg)](https://pypi.python.org/pypi/jinziqi/)
+
+
 ##HOW TO USE
 
 run the following script:
