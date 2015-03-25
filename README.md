@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/snowleung/jinziqi_python.svg?branch=master)](https://travis-ci.org/snowleung/jinziqi_python)
 ##HOW TO USE
 
 run the following script:
